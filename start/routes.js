@@ -17,6 +17,11 @@
 const Route = use('Route')
 
 Route.group(() => {
+  Route.post('login', 'AuthController.login')
+  Route.post('register', 'AuthController.register')
+}).prefix('api/v1')
+
+Route.group(() => {
   Route.get('/profile', 'UserController.profile')
   Route.get('/crosswords', 'CrosswordController.index')
   Route.get('/crosswords/:id/answers', 'CrosswordController.answers')
