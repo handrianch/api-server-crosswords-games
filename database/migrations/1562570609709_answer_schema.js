@@ -7,7 +7,7 @@ class AnswerSchema extends Schema {
   up () {
     this.create('answers', (table) => {
       table.increments()
-      table.integer('crossword_id').unsigned().references('id').inTable('crosswords')
+      table.integer('crossword_id').unsigned().references('id').inTable('crosswords').onDelete('cascade').onUpdate('cascade')
       table.integer('number').notNullable()
       table.text('question').notNullable()
       table.string('answer').notNullable()

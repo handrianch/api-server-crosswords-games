@@ -39,7 +39,10 @@ class User extends Model {
   }
 
   crosswords () {
-    return this.belongsToMany('App/Models/Crossword').pivotTable('user_crossword').withPivot(['is_finished'])
+    return this.belongsToMany('App/Models/Crossword')
+               .pivotTable('user_crossword')
+               .withTimestamps()
+               .withPivot(['is_finished'])
   }
 
   answers () {
