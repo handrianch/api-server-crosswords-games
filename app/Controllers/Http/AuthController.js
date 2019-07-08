@@ -1,6 +1,6 @@
 'use strict'
 const User = use('App/Models/User')
-const { validate } = use('Validator')
+const { validateAll } = use('Validator')
 
 class AuthController {
 
@@ -14,12 +14,21 @@ class AuthController {
 
     async register({ request, auth, response }) {
       const rules = {
+        username: 'required',
         email: 'required|email|unique:users,email',
         password: 'required'
       }
 
+      const messages = {
+        'username.required': 'Username cannot be empty!',
+        email : 'Email format must be correct!',
+        'email.required': 'Email cannot be empty!',
+        'email.unique': 'Email has been registered',
+        'password.required': 'Password cannot be empty!'
+      }
+
       const newUser = request.only(['username', 'email', 'password'])
-      const validation = await validate(newUser, rules)
+      const validation = await validateAll(newUser, rules, messages)
 
       if(validation.fails()) {
         return response.status(400).send(validation.messages())
