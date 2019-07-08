@@ -4,6 +4,9 @@
 const Model = use('Model')
 
 class Answer extends Model {
+  crossword () {
+    return this.belongsTo('App/Models/Crossword')
+  }
 }
 
 module.exports = Answer
