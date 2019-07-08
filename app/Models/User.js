@@ -7,6 +7,9 @@ const Model = use('Model')
 const Hash = use('Hash')
 
 class User extends Model {
+  static get hidden() {
+    return ['password']
+  }
   static boot () {
     super.boot()
 
@@ -36,7 +39,7 @@ class User extends Model {
   }
 
   crosswords () {
-    return this.belongsToMany('App/Models/Crossword').pivotTable('user_crossword')
+    return this.belongsToMany('App/Models/Crossword').pivotTable('user_crossword').withPivot(['is_finished'])
   }
 
   answers () {

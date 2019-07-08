@@ -16,13 +16,9 @@
 /** @type {typeof import('@adonisjs/framework/src/Route/Manager')} */
 const Route = use('Route')
 
-Route.get('/', () => {
-  return { greeting: 'Hello world in JSON' }
-})
-
 Route.group(() => {
   Route.get('/profile', 'UserController.profile')
-  Route.get('/crosswords', 'CrosswordController.indx')
+  Route.get('/crosswords', 'CrosswordController.index')
   Route.get('/crosswords/:id/answers', 'CrosswordController.answers')
   Route.get('/crosswords/:id/user-answers', 'CrosswordController.userAnswers')
-}).prefix('api/v1').middleware('auth')
+}).prefix('api/v1') // .middleware('auth')
