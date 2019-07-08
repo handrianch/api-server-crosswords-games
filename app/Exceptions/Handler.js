@@ -40,7 +40,10 @@ class ExceptionHandler extends BaseExceptionHandler {
     } else if(error.name == 'Error') {
       message = 'Internal Server Error'
       status = 500
-    }
+    } //else if(error.name == 'RuntimeException') {
+    //   message = 'Internal Server Error'
+    //   status = 500
+    // }
 
     return response.status(status).send({message})
     // response.status(error.status).send(error.message)
