@@ -5,16 +5,10 @@ const Database = use('Database')
 
 class CrosswordController {
 
-  async index ({ request, response, view }) {
-    let results = [];
+  async index ({ request, response, auth }) {
 
-    try {
-      results = await Database.select('crosswords.*', 'user_crossword.is_finished',)
-                              .from('crosswords')
-                              .leftJoin('user_crossword', 'crosswords.id', 'user_crossword.crossword_id')
-    } catch (e) {
-      console.error(e)
-    }
+    const user = await auth.getUser()
+    const results = await user.crosswords().fetch()
 
     return response.status(200).send({data: results})
   }
