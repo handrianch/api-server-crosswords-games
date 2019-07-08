@@ -7,15 +7,15 @@ class UserAnswerSchema extends Schema {
   up () {
     this.create('user_answer', (table) => {
       table.increments()
-      table.integer('user_id').unsigned().references('id').inTable('users')
-      table.integer('answer_id').unsigned().references('id').inTable('answers')
+      table.integer('user_id').unsigned().references('id').inTable('users').onDelete('cascade').onUpdate('cascade')
+      table.integer('answer_id').unsigned().references('id').inTable('answers').onDelete('cascade').onUpdate('cascade')
       table.string('answer')
       table.timestamps()
     })
   }
 
   down () {
-    this.drop('user_answers')
+    this.drop('user_answer')
   }
 }
 

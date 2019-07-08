@@ -7,6 +7,13 @@ class Crossword extends Model {
   answers () {
     return this.hasMany('App/Models/Answer', 'id', 'crossword_id')
   }
+
+  users () {
+    return this.belongsToMany('App/Models/User')
+               .pivotTable('user_crossword')
+               .withTimestamps()
+               .withPivot(['is_finished'])
+  }
 }
 
 module.exports = Crossword

@@ -1,5 +1,6 @@
 'use strict'
 const User = use('App/Models/User')
+const Crossword = use('App/Models/Crossword')
 const { validateAll } = use('Validator')
 
 class AuthController {
@@ -21,7 +22,7 @@ class AuthController {
 
       const messages = {
         'username.required': 'Username cannot be empty!',
-        email : 'Email format must be correct!',
+        'email' : 'Email format must be correct!',
         'email.required': 'Email cannot be empty!',
         'email.unique': 'Email has been registered',
         'password.required': 'Password cannot be empty!'
@@ -35,6 +36,8 @@ class AuthController {
       }
 
       const user = await User.create(newUser)
+      const crosswords = await Crossword.query().select('id').from('crosswords').pluck('id')
+      user.crosswords().attach(crosswords)
 
       return auth.withRefreshToken().attempt(user.email, newUser.password)
     }
