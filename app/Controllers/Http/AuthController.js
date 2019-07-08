@@ -14,28 +14,20 @@ class AuthController {
 
     async register({ request, auth, response }) {
       const rules = {
-        // username: 'required|username|unique:users,username',
         email: 'required|email|unique:users,email',
         password: 'required'
       }
 
-      const { username, email, password } = request.all()
-      const validation = await validate(request.all(), rules)
+      const newUser = request.only(['username', 'email', 'password'])
+      const validation = await validate(newUser, rules)
 
       if(validation.fails()) {
-        return response.status(400).json({"message": "Email sudah terdaftar"})
+        return response.status(400).send(validation.messages())
       }
 
-      let user = new User()
-      user.username = username
-      user.email = email
-      user.password = password
+      const user = await User.create(newUser)
 
-      await user.save()
-
-      return auth
-        .withRefreshToken()
-        .attempt(email,password)
+      return auth.withRefreshToken().attempt(user.email, newUser.password)
     }
 }
 
