@@ -8,9 +8,7 @@ class AuthController {
     async login({ request, auth, response }) {
       const { email, password } = request.all()
 
-      return auth
-  		  .withRefreshToken()
-  		  .attempt(email,password)
+      return auth.attempt(email,password)
     }
 
     async register({ request, auth, response }) {
