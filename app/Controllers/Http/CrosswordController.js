@@ -16,7 +16,7 @@ class CrosswordController {
     const user = await auth.getUser()
     const results = await user.crosswords()
                               .where('crosswords.id', params.id)
-                              .with('answers', builder => builder.groupBy('type'))
+                              .with('answers')
                               .fetch()
 
     return response.status(200).send({data: results})

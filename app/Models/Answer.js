@@ -7,6 +7,10 @@ class Answer extends Model {
   crossword () {
     return this.belongsTo('App/Models/Crossword')
   }
+
+  users () {
+    return this.belongsToMany('App/Models/User').pivotTable('user_answer').with(['answer'])
+  }
 }
 
 module.exports = Answer
