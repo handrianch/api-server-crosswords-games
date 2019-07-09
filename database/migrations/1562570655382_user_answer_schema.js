@@ -9,7 +9,7 @@ class UserAnswerSchema extends Schema {
       table.increments()
       table.integer('user_id').unsigned().references('id').inTable('users').onDelete('cascade').onUpdate('cascade')
       table.integer('answer_id').unsigned().references('id').inTable('answers').onDelete('cascade').onUpdate('cascade')
-      table.string('answer')
+      table.string('answer').defaultTo('')
       table.timestamps()
     })
   }
