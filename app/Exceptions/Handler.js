@@ -32,7 +32,7 @@ class ExceptionHandler extends BaseExceptionHandler {
       message = 'Invalid Password'
       status = 400
     } else if(error.name == 'UserNotFoundException') {
-      message = 'Username Not found'
+      message = 'Email Not found'
       status = 404
     } else if(error.name == 'InvalidJwtToken') {
       message = 'Authorization Failed'

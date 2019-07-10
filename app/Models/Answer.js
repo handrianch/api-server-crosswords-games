@@ -9,7 +9,10 @@ class Answer extends Model {
   }
 
   users () {
-    return this.belongsToMany('App/Models/User').pivotTable('user_answer').with(['answer'])
+    return this.belongsToMany('App/Models/User')
+               .pivotTable('user_answer')
+               .withTimestamps()
+               .with(['answer'])
   }
 }
 
