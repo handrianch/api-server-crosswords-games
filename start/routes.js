@@ -26,4 +26,6 @@ Route.group(() => {
   Route.get('/crosswords', 'CrosswordController.index')
   Route.get('/crosswords/:id/answers', 'CrosswordController.answers')
   Route.get('/crosswords/:id/user-answers', 'CrosswordController.userAnswers')
+  Route.post('/crosswords/:id', 'CrosswordController.store')
+  Route.patch('/crosswords/:id/check-answers', 'CrosswordController.checkAnswers')
 }).prefix('api/v1').middleware('auth')

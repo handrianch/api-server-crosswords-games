@@ -29,18 +29,23 @@ class AuthController {
 
       const newUser = request.only(['username', 'email', 'password'])
       const validation = await validateAll(newUser, rules, messages)
+      let user = null;
 
       if(validation.fails()) {
         return response.status(400).send(validation.messages())
       }
 
-      const user = await User.create(newUser)
+      try {
+        user = await User.create(newUser)
+      }catch(e){
+        return response.status(500).send({message: 'Internal Server Error Anj'})
+      }
+
       const crosswords = await Crossword.query().select('id').pluck('id')
-      const answers    = await Answer.query().select('id').pluck('id')
+      const answers = await Answer.query().select('id').pluck('id')
       user.crosswords().attach(crosswords)
       user.answers().attach(answers)
-
-      return auth.withRefreshToken().attempt(user.email, newUser.password)
+      return auth.attempt(user.email, newUser.password)
     }
 }
 

@@ -41,16 +41,14 @@ class User extends Model {
 
   crosswords () {
     return this.belongsToMany('App/Models/Crossword')
-               .pivotTable('user_crossword')
-               .withTimestamps()
+               .pivotModel('App/Models/UserCrossword')
                .withPivot(['is_finished'])
   }
 
   answers () {
     return this.belongsToMany('App/Models/Answer')
                .pivotTable('user_answer')
-               .withTimestamps()
-               .with(['answer'])
+               .withPivot(['answer'])
   }
 }
 

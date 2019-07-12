@@ -30,7 +30,7 @@ class ExceptionHandler extends BaseExceptionHandler {
       status = 404
     } else if(error.name == 'PasswordMisMatchException') {
       message = 'Invalid Password'
-      status = 400
+      status = 401
     } else if(error.name == 'UserNotFoundException') {
       message = 'Email Not found'
       status = 404

@@ -10,8 +10,7 @@ class Crossword extends Model {
 
   users () {
     return this.belongsToMany('App/Models/User')
-               .pivotTable('user_crossword')
-               .withTimestamps()
+               .pivotModel('App/Models/UserCrossword')
                .withPivot(['is_finished'])
   }
 }

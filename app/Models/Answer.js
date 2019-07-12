@@ -11,8 +11,7 @@ class Answer extends Model {
   users () {
     return this.belongsToMany('App/Models/User')
                .pivotTable('user_answer')
-               .withTimestamps()
-               .with(['answer'])
+               .withPivot(['answer'])
   }
 }
 
