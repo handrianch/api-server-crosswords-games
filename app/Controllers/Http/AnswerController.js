@@ -7,6 +7,8 @@
 /**
  * Resourceful controller for interacting with answers
  */
+const Answer = use('App/Models/Answer')
+
 class AnswerController {
   /**
    * Show a list of all answers.
@@ -41,6 +43,15 @@ class AnswerController {
    * @param {Response} ctx.response
    */
   async store ({ request, response }) {
+    const answers = await Answer.create(request.all())
+    try{
+        return{
+          "status":"success",
+          data:answers
+        }
+    }catch(error){
+        return error
+    }
   }
 
   /**

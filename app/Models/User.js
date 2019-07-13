@@ -39,19 +39,19 @@ class User extends Model {
     return this.hasMany('App/Models/Token')
   }
 
-  crosswords () {
-    return this.belongsToMany('App/Models/Crossword')
-               .pivotTable('user_crossword')
-               .withTimestamps()
-               .withPivot(['is_finished'])
-  }
+  // crosswords () {
+  //   return this.belongsToMany('App/Models/Crossword')
+  //              .pivotTable('user_crossword')
+  //              .withTimestamps()
+  //              .withPivot(['is_finished'])
+  // }
 
-  answers () {
-    return this.belongsToMany('App/Models/Answer')
-               .pivotTable('user_answer')
-               .withTimestamps()
-               .with(['answer'])
-  }
+  // answers () {
+  //   return this.belongsToMany('App/Models/Answer')
+  //              .pivotTable('user_answer')
+  //              .withTimestamps()
+  //              .with(['answer'])
+  // }
 }
 
 module.exports = User
